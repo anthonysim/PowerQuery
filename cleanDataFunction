@@ -1,0 +1,29 @@
+/*
+This function "cleans" all the data in a table.
+
+All the trimming, cleaning, etc, etc is all done through this function.
+
+Wrap the table around this function to execute. 
+*/
+
+
+let
+    Source = (table as table)=>
+
+let
+    demote_headers = Table.DemoteHeaders(table),
+    column_list = Table.ColumnNames(demote_headers),
+    text_list = List.Transform(column_list, each {_, type text}),
+    trim_list = List.Transform(column_list, each {_, Text.Trim}),
+    clean_list = List.Transform(column_list, each {_, Text.Clean}),
+    upper_list = List.Transform(column_list, each {_, Text.Upper}),
+    text_table = Table.TransformColumnTypes(demote_headers, text_list),
+    trim_table = Table.TransformColumns(text_table, trim_list),
+    clean_table = Table.TransformColumns(trim_table, clean_list),
+    upper_table = Table.TransformColumns(clean_table, upper_list),
+    null_blanks = Table.ReplaceValue(upper_table, "", null, Replacer.ReplaceValue, column_list),
+    promote_headers = Table.PromoteHeaders(null_blanks, [PromoteAllScalars=true])
+in
+    promote_headers
+in
+    Source
