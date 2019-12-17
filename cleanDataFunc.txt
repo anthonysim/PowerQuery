@@ -6,7 +6,6 @@ All the trimming, cleaning, etc, etc is all done through this function.
 Wrap the table around this function to execute. 
 */
 
-
 let
     Source = (table as table)=>
 
