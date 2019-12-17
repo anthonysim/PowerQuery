@@ -5,4 +5,4 @@ I don't like spending time cleaning, comparing, setting up, and preparing data a
 
 I'd rather spend 80% of time on analysis and 20% of time on preperation rather than the reverse.
 
-I plan to add just random functions that helps me out at work so I can minimize time spent preping data. 
+I plan to just random functions that helps me out at work so I can minimize time spent preping data. 
