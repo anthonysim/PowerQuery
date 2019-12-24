@@ -1,0 +1,18 @@
+/*
+An example of a function in PowerQuery to append like text files.
+
+The most important part is the file path.
+
+Invoke the function and wrap it with Folder Path & Name. 
+*/
+
+(filePath) => 
+
+let
+    Source = Csv.Document(File.Contents(filePath),[Delimiter="	", Columns=6, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}, {"Column2", type text}, {"Column3", type text}, {"Column4", type text}, {"Column5", type text}, {"Column6", type text}}),
+    #"Filtered Rows" = Table.SelectRows(#"Changed Type", each ([Column1] <> "" and [Column1] <> "Contingent Worker:" and [Column1] <> "Date:" and [Column1] <> "From:" and [Column1] <> "Number of Record(s):" and [Column1] <> "To:")),
+    #"Promoted Headers" = Table.PromoteHeaders(#"Filtered Rows", [PromoteAllScalars=true]),
+    #"Changed Type1" = Table.TransformColumnTypes(#"Promoted Headers",{{"Work Date", type date}, {"Out", type time}, {"Reg Hrs", type number}, {"OT Hrs", type number}, {"Misc Hrs", type number}, {"Expenses", type number}})
+in
+    #"Changed Type1"
