@@ -6,7 +6,7 @@ All the trimming, cleaning, etc, etc is all done through this function.
 Wrap the table around this function to execute. 
 */
 
-    Source = (table as table)=>
+left cleanData = (table as table)=>
 
 let
     demote_headers = Table.DemoteHeaders(table),
@@ -23,3 +23,6 @@ let
     promote_headers = Table.PromoteHeaders(null_blanks, [PromoteAllScalars=true])
 in
     promote_headers
+    
+in
+    cleanData
