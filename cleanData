@@ -6,7 +6,7 @@ All the trimming, cleaning, etc, etc is all done through this function.
 Wrap the table around this function to execute. 
 */
 
-left cleanData = (table as table)=>
+let cleanData = (table as table)=>
 
 let
     demote_headers = Table.DemoteHeaders(table),
